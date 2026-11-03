@@ -1,0 +1,203 @@
+/* @import url() FONT IMPORTS MUST ALWAYS BE AT THE VERY TOP OF THIS FILE, ABOVE THE TAILWIND IMPORTS — DO NOT DELETE THIS COMMENT */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Sora:wght@300;400;500;600&display=swap');
+
+/* CRITICAL: THE FOLLOWING TAILWIND IMPORTS MUST NEVER BE DELETED OR REORDERED — DO NOT DELETE THIS COMMENT */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* END TAILWIND IMPORTS — ALL OTHER CSS MUST GO BELOW THIS LINE */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
+  }
+
+  body {
+    @apply bg-capabilities text-cream font-sans antialiased selection:bg-gold selection:text-capabilities overflow-x-hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  body::-webkit-scrollbar {
+    display: none;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif tracking-tight text-cream;
+  }
+
+  ::selection {
+    background: #D4B37A;
+    color: #050F13;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .section-x {
+    @apply px-4 sm:px-6 md:px-12;
+  }
+
+  /* Ambient monsoon atmosphere */
+  .india-surface-mesh {
+    background-image:
+      radial-gradient(ellipse 75% 55% at 8% -5%, rgba(212, 179, 122, 0.14), transparent 55%),
+      radial-gradient(ellipse 60% 45% at 95% 105%, rgba(27, 58, 64, 0.55), transparent 58%),
+      radial-gradient(ellipse 40% 30% at 50% 50%, rgba(212, 179, 122, 0.03), transparent 70%);
+  }
+
+  .india-grain {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 180px 180px;
+    opacity: 0.045;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+  }
+
+  /* Subtle jaali lattice — India craft cue, very light */
+  .india-jaali {
+    background-image: url("data:image/svg+xml,%3Csvg width='56' height='56' viewBox='0 0 56 56' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M28 4 L52 28 L28 52 L4 28 Z' fill='none' stroke='%23D4B37A' stroke-opacity='0.07' stroke-width='0.8'/%3E%3Ccircle cx='28' cy='28' r='3' fill='none' stroke='%23D4B37A' stroke-opacity='0.08' stroke-width='0.7'/%3E%3C/svg%3E");
+    background-size: 56px 56px;
+    pointer-events: none;
+  }
+
+  .india-fade-up {
+    animation: fade-up 0.95s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .india-fade-up-delay {
+    animation: fade-up 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.14s both;
+  }
+
+  .india-fade-up-delay-2 {
+    animation: fade-up 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.28s both;
+  }
+
+  .india-rule {
+    transform-origin: left center;
+    animation: rule-grow 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.22s both;
+  }
+
+  .india-frame {
+    position: relative;
+  }
+
+  .india-frame::before,
+  .india-frame::after {
+    content: '';
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border-color: #D4B37A;
+    border-style: solid;
+    opacity: 0.7;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .india-frame::before {
+    top: 0;
+    left: 0;
+    border-width: 1.5px 0 0 1.5px;
+  }
+
+  .india-frame::after {
+    right: 0;
+    bottom: 0;
+    border-width: 0 1.5px 1.5px 0;
+  }
+
+  .india-media {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .india-media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, transparent 55%, rgba(5, 15, 19, 0.35) 100%);
+  }
+
+  .india-panel {
+    border: 1px solid rgba(212, 179, 122, 0.22);
+    background:
+      linear-gradient(160deg, rgba(212, 179, 122, 0.06) 0%, transparent 42%),
+      rgba(7, 20, 24, 0.72);
+    transition: border-color 0.35s ease, background 0.35s ease, transform 0.35s ease;
+  }
+
+  .india-panel:hover {
+    border-color: rgba(212, 179, 122, 0.5);
+    background:
+      linear-gradient(160deg, rgba(212, 179, 122, 0.1) 0%, transparent 48%),
+      rgba(10, 28, 34, 0.88);
+  }
+
+  .india-btn-sheen {
+    overflow: hidden;
+  }
+
+  .india-btn-sheen::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,0.22) 50%, transparent 65%);
+    transform: translateX(-120%);
+    pointer-events: none;
+  }
+
+  .india-btn-sheen:hover::after {
+    animation: sheen 0.9s ease;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rule-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes sheen {
+  from {
+    transform: translateX(-120%);
+  }
+  to {
+    transform: translateX(120%);
+  }
+}
