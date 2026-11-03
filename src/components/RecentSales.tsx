@@ -1,6 +1,6 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { design } from '../lib/design-tokens';
 import { salesGraphics, salesSrc } from '../lib/sales';
 
@@ -100,8 +100,38 @@ function Lightbox({
 
 export function RecentSales() {
   const [active, setActive] = useState<SaleItem | null>(null);
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
   const onOpen = useCallback((item: SaleItem) => setActive(item), []);
   const onClose = useCallback(() => setActive(null), []);
+
+  const updateScrollState = useCallback(() => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const max = el.scrollWidth - el.clientWidth;
+    setCanScrollLeft(el.scrollLeft > 4);
+    setCanScrollRight(el.scrollLeft < max - 4);
+  }, []);
+
+  useEffect(() => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    updateScrollState();
+    el.addEventListener('scroll', updateScrollState, { passive: true });
+    window.addEventListener('resize', updateScrollState);
+    return () => {
+      el.removeEventListener('scroll', updateScrollState);
+      window.removeEventListener('resize', updateScrollState);
+    };
+  }, [updateScrollState]);
+
+  const scrollByCards = (direction: -1 | 1) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const amount = Math.min(320, Math.round(el.clientWidth * 0.75));
+    el.scrollBy({ left: direction * amount, behavior: 'smooth' });
+  };
 
   if (items.length === 0) return null;
 
@@ -119,10 +149,40 @@ export function RecentSales() {
           <div className={type.goldRule} />
           <p className={`${type.sectionSubtitle} m-0 max-w-2xl`}>{SALES_COPY}</p>
         </div>
+
+        <div className="mb-4 flex items-center justify-between gap-3">
+          <p className="m-0 font-sans text-[11px] uppercase tracking-[0.18em] text-cream/45 md:hidden">
+            Swipe to browse
+          </p>
+          <p className="m-0 hidden font-sans text-[11px] uppercase tracking-[0.18em] text-cream/45 md:block">
+            Scroll sideways
+          </p>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => scrollByCards(-1)}
+              disabled={!canScrollLeft}
+              className="inline-flex h-10 w-10 items-center justify-center border border-gold/40 text-gold transition-colors hover:bg-gold/10 disabled:cursor-not-allowed disabled:opacity-30"
+              aria-label="Scroll sales left"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollByCards(1)}
+              disabled={!canScrollRight}
+              className="inline-flex h-10 w-10 items-center justify-center border border-gold/40 text-gold transition-colors hover:bg-gold/10 disabled:cursor-not-allowed disabled:opacity-30"
+              aria-label="Scroll sales right"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          </div>
+        </div>
       </div>
 
       <div
-        className="overflow-x-auto overscroll-x-contain pb-2 touch-pan-x scrollbar-hide [-webkit-overflow-scrolling:touch] snap-x snap-mandatory"
+        ref={scrollerRef}
+        className="overflow-x-auto overscroll-x-contain touch-pan-x snap-x snap-mandatory pb-3 [scrollbar-width:thin] [scrollbar-color:rgba(212,179,122,0.55)_transparent]"
         style={{ WebkitOverflowScrolling: 'touch' }}
       >
         <div className="flex w-max gap-4 px-5 sm:gap-5 sm:px-6 md:px-12 lg:px-[82px]">
@@ -134,7 +194,6 @@ export function RecentSales() {
               <SaleCard item={item} onOpen={onOpen} />
             </div>
           ))}
-          {/* End peek padding so last card isn't flush to the edge */}
           <div className="w-1 shrink-0 sm:w-2" aria-hidden="true" />
         </div>
       </div>
