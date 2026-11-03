@@ -138,11 +138,11 @@ export function RecentSales() {
   return (
     <section
       id="sales"
-      className={`${layout.section} ${layout.sectionPadding} ${layout.scrollMt}`}
+      className={`${layout.section} ${layout.scrollMt} pt-14 sm:pt-16 md:pt-20 pb-8 sm:pb-10 md:pb-12`}
     >
       <div className={layout.container}>
         <div
-          className={`${layout.sectionIntro} ${layout.sectionHeaderGap} mx-auto items-center text-center`}
+          className={`${layout.sectionIntro} mb-6 md:mb-7 mx-auto items-center text-center`}
         >
           <p className={`${type.eyebrow} m-0`}>Track record</p>
           <h2 className={`${type.sectionTitle} m-0 text-white`}>Recent sales</h2>
@@ -150,7 +150,7 @@ export function RecentSales() {
           <p className={`${type.sectionSubtitle} m-0 max-w-2xl`}>{SALES_COPY}</p>
         </div>
 
-        <div className="mb-4 flex items-center justify-between gap-3">
+        <div className="mb-3 flex items-center justify-between gap-3">
           <p className="m-0 font-sans text-[11px] uppercase tracking-[0.18em] text-cream/45 md:hidden">
             Swipe to browse
           </p>
@@ -162,19 +162,19 @@ export function RecentSales() {
               type="button"
               onClick={() => scrollByCards(-1)}
               disabled={!canScrollLeft}
-              className="inline-flex h-10 w-10 items-center justify-center border border-gold/40 text-gold transition-colors hover:bg-gold/10 disabled:cursor-not-allowed disabled:opacity-30"
+              className="inline-flex h-9 w-9 items-center justify-center border border-gold/40 text-gold transition-colors hover:bg-gold/10 disabled:cursor-not-allowed disabled:opacity-30"
               aria-label="Scroll sales left"
             >
-              <ChevronLeft className="h-5 w-5" />
+              <ChevronLeft className="h-4 w-4" />
             </button>
             <button
               type="button"
               onClick={() => scrollByCards(1)}
               disabled={!canScrollRight}
-              className="inline-flex h-10 w-10 items-center justify-center border border-gold/40 text-gold transition-colors hover:bg-gold/10 disabled:cursor-not-allowed disabled:opacity-30"
+              className="inline-flex h-9 w-9 items-center justify-center border border-gold/40 text-gold transition-colors hover:bg-gold/10 disabled:cursor-not-allowed disabled:opacity-30"
               aria-label="Scroll sales right"
             >
-              <ChevronRight className="h-5 w-5" />
+              <ChevronRight className="h-4 w-4" />
             </button>
           </div>
         </div>
@@ -182,10 +182,10 @@ export function RecentSales() {
 
       <div
         ref={scrollerRef}
-        className="overflow-x-auto overscroll-x-contain touch-pan-x snap-x snap-mandatory pb-3 [scrollbar-width:thin] [scrollbar-color:rgba(212,179,122,0.55)_transparent]"
+        className="sales-scroller overflow-x-auto overscroll-x-contain touch-pan-x snap-x snap-mandatory"
         style={{ WebkitOverflowScrolling: 'touch' }}
       >
-        <div className="flex w-max gap-4 px-5 sm:gap-5 sm:px-6 md:px-12 lg:px-[82px]">
+        <div className="flex w-max gap-4 px-5 pb-1 sm:gap-5 sm:px-6 md:px-12 lg:px-[82px]">
           {items.map((item) => (
             <div
               key={item.file}

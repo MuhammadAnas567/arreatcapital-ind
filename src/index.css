@@ -53,6 +53,35 @@
     display: none;
   }
 
+  .sales-scroller {
+    scrollbar-width: auto;
+    scrollbar-color: #D4B37A rgba(243, 234, 223, 0.08);
+  }
+
+  .sales-scroller::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .sales-scroller::-webkit-scrollbar-track {
+    background: rgba(243, 234, 223, 0.08);
+    border-radius: 0;
+  }
+
+  .sales-scroller::-webkit-scrollbar-thumb {
+    background: #D4B37A;
+    border-radius: 0;
+  }
+
+  .sales-scroller::-webkit-scrollbar-thumb:hover {
+    background: #E2C48E;
+  }
+
+  .sales-scroller::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
   .section-x {
     @apply px-4 sm:px-6 md:px-12;
   }
