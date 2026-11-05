@@ -16,8 +16,7 @@ import { design } from '../lib/design-tokens';
 import {
   CONTACT_EMAIL,
   OFFICE,
-  PHONE_DISPLAY,
-  PHONE_TEL,
+  PHONES,
   WHATSAPP_URL,
 } from '../lib/contact';
 
@@ -143,15 +142,17 @@ function FooterColumns() {
               {CONTACT_EMAIL}
             </a>
           </li>
-          <li className="flex items-center gap-3">
-            <Phone size={16} className="shrink-0" strokeWidth={1.5} style={{ color: GOLD }} />
-            <a
-              href={PHONE_TEL}
-              className="font-sans text-[13px] text-white/65 font-light hover:text-[#D4B37A] transition-colors"
-            >
-              {PHONE_DISPLAY}
-            </a>
-          </li>
+          {PHONES.map((phone) => (
+            <li key={phone.e164} className="flex items-center gap-3">
+              <Phone size={16} className="shrink-0" strokeWidth={1.5} style={{ color: GOLD }} />
+              <a
+                href={phone.tel}
+                className="font-sans text-[13px] text-white/65 font-light hover:text-[#D4B37A] transition-colors"
+              >
+                {phone.display}
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
 

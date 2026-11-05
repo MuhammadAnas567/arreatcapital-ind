@@ -6,8 +6,7 @@ import { cn } from './Button';
 import {
   CONTACT_EMAIL,
   OFFICE,
-  PHONE_DISPLAY,
-  PHONE_TEL,
+  PHONES,
   WHATSAPP_URL,
 } from '../lib/contact';
 
@@ -22,14 +21,20 @@ const contactMethods = [
   },
   {
     label: 'WhatsApp · India desk',
-    value: PHONE_DISPLAY,
+    value: PHONES[0].display,
     href: WHATSAPP_URL,
     icon: MessageCircle,
   },
   {
     label: 'Phone',
-    value: PHONE_DISPLAY,
-    href: PHONE_TEL,
+    value: PHONES[0].display,
+    href: PHONES[0].tel,
+    icon: Phone,
+  },
+  {
+    label: 'Phone',
+    value: PHONES[1].display,
+    href: PHONES[1].tel,
     icon: Phone,
   },
   {
@@ -179,7 +184,7 @@ function ContactDetails({ compact = false }: { compact?: boolean }) {
           );
 
           return (
-            <li key={method.label}>
+            <li key={`${method.label}-${method.value}`}>
               {method.href ? (
                 <a href={method.href} className="flex items-center gap-3.5 no-underline">
                   {content}
