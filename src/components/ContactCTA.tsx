@@ -15,7 +15,7 @@ const { contact, layout } = design;
 
 const contactMethods = [
   {
-    label: 'India office',
+    label: OFFICE.label,
     value: `${OFFICE.line1}, ${OFFICE.city}`,
     href: null as string | null,
     icon: Building2,
